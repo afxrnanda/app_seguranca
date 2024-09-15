@@ -1,0 +1,158 @@
+/* CSS Global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 425px;
+    height: 100vh;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* Top Bar */
+.top-bar {
+    background-color: #006666;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.icon-left, .icon-right {
+    width: 24px;
+    height: 24px;
+}
+
+.icon-left img, .icon-right img {
+    width: 100%;
+    height: 100%;
+}
+
+/* Sessão de report */
+.report-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.report-circle {
+    width: 100px;
+    height: 100px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid #006666;
+}
+
+.report-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.report-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+/* Caixa de denuncias */
+.report-box {
+    width: 90%;
+    background-color: #f2f2f2;
+    border-radius: 15px;
+    padding: 15px;
+    position: relative;
+}
+
+.report-input {
+    width: 100%;
+    height: 120px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #ffffff;
+    color: #999999;
+    resize: none;
+    outline: none;
+}
+
+.send-button {
+    background-color: #006666;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    position: absolute;
+    bottom: -20px;
+    right: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.send-button:hover {
+    background-color: #004d4d;
+}
+
+/* Botão de navegação */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: #006666;
+    padding: 15px 0;
+}
+
+.nav-button {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-button img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+.nav-button:hover {
+    opacity: 0.8;
+}
+
+/* Mobile Responsivo */
+@media screen and (max-width: 425px) {
+    .container {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+}

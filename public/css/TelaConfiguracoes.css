@@ -1,0 +1,177 @@
+/* CSS Global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 425px;
+    height: 100vh;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* Top Bar */
+.top-bar {
+    background-color: #006666;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.icon-left, .icon-right {
+    width: 24px;
+    height: 24px;
+}
+
+.icon-left img, .icon-right img {
+    width: 100%;
+    height: 100%;
+}
+
+/* Sessão de configurações */
+.settings-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.settings-circle {
+    width: 100px;
+    height: 100px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid #006666;
+    margin-bottom: 20px;
+}
+
+.settings-icon {
+    width: 60px;
+    height: 60px;
+}
+
+/* Sessão pesquisa */
+.search-bar {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    background-color: #f2f2f2;
+    border-radius: 30px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.search-button img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Opções de configurações */
+.settings-options {
+    width: 90%;
+}
+
+.option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #cccccc;
+}
+
+.option-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+}
+
+.option span {
+    font-size: 16px;
+    color: black;
+}
+
+.arrow {
+    font-size: 16px;
+    color: black;
+}
+
+.user-name {
+    margin-left: auto;
+    margin-right: 10px;
+    color: #cccccc;
+}
+
+/* Botão de navegação */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: #006666;
+    padding: 15px 0;
+}
+
+.nav-button {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-button img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+.nav-button:hover {
+    opacity: 0.8;
+}
+
+/* Mobile Responsivo */
+@media screen and (max-width: 425px) {
+    .container {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+}
