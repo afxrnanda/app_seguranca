@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: backend.ifrn.cn
+      MYSQL_DATABASE: usuarios
+      MYSQL_USER: ifrn
+      MYSQL_PASSWORD: backend.ifrn.cn
+    ports:
+      - "3306:3306"
+
