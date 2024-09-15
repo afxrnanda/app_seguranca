@@ -10,8 +10,8 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'views')));
 
 // Usando as rotas
-app.use(userRoutes);
-app.use(denunciaRoutes);
+app.use('/', userRoutes);
+app.use('/', denunciaRoutes);
 
 app.listen(3000, () => {
   console.log('Servidor rodando na porta 3000');
