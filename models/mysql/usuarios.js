@@ -6,9 +6,9 @@ class Usuario {
     mysqlConnection.query(query, [usuario.nome, usuario.email, usuario.senha], callback);
   }
 
-  static findByUsername(username, callback) {
-    const query = 'SELECT * FROM usuarios WHERE usuario = ?';
-    mysqlConnection.query(query, [username], (err, results) => {
+  static findByUsername(email, callback) {
+    const query = 'SELECT * FROM usuarios WHERE email = ?';
+    mysqlConnection.query(query, [email], (err, results) => {
       if (err) return callback(err);
       callback(null, results[0]);
     });

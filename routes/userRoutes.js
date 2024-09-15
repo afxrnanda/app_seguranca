@@ -4,8 +4,11 @@ const Usuario = require('../models/mysql/usuarios');
 
 // Rota para registrar um novo usuário
 router.post('/register', (req, res) => {
-  const { username, password } = req.body;
-  Usuario.create({ username, password }, (err, result) => {
+  const { nome, email, senha } = req.body;
+  console.log(req.body)
+
+  Usuario.create({ nome, email, senha }, (err, result) => {
+    console.log(err)
     if (err) return res.status(500).send('Erro ao criar usuário');
     res.status(201).send('Usuário registrado com sucesso');
   });
@@ -13,10 +16,10 @@ router.post('/register', (req, res) => {
 
 // Rota para login de usuário
 router.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  Usuario.findByUsername(username, (err, user) => {
+  const { email, senha } = req.body;
+  Usuario.findByUsername(email, (err, user) => {
     if (err) return res.status(500).send('Erro ao buscar usuário');
-    if (!user || user.password !== password) {
+    if (!user || user.senha !== senha) {
       return res.status(401).send('Credenciais inválidas');
     }
     res.send('Login realizado com sucesso');
