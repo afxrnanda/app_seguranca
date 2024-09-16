@@ -15,10 +15,10 @@
             <h1>LOGIN</h1>
             <p>Login to your account</p>
 
-            <form>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Password" required>
-                <button type="submit" class="btn-signin"><a href="/TelaInicial">Sign in</a></button>
+            <form action="/login" method="POST">
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit" class="btn-signin">Sign in</button>
             </form>
 
             <p class="or-signin">- OR SIGN IN WITH -</p>

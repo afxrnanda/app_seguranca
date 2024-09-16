@@ -10,7 +10,7 @@
     <div class="container">
         <!-- Top Bar -->
         <div class="top-bar">
-            <a href="#" class="icon-left">
+            <a href="TelaInicial.html" class="icon-left">
                 <img src="/imgs/Back.png" alt="Voltar">
             </a>
             <span class="title">TELA DENUNCIA</span>
@@ -26,10 +26,12 @@
             <h2 class="report-title">MAKE A REPORT</h2>
 
             <!-- Caixa de report -->
-            <div class="report-box">
-                <textarea class="report-input" placeholder="Write your report here"></textarea>
-                <button class="send-button">Send</button>
-            </div>
+            <form action="/submit-report" method="POST">
+                <div class="report-box">
+                    <textarea class="report-input" name="reportText" placeholder="Write your report here" style="width: 80%"></textarea>
+                    <button type="submit" class="send-button">Send</button>
+                </div>
+            </form>
         </div>
 
         <!-- Botões de navegação -->
