@@ -10,7 +10,11 @@ const connectToDatabase = require('./mongodb');
 
 const app = express();
 const port = 3000;
+
+// Configuração de middlewares
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Servindo CSS e Imagens a partir da pasta public
 app.use(express.static(path.join(__dirname, 'public')));
@@ -23,41 +27,48 @@ app.use('/', userRoutes);
 app.use('/', denunciaRoutes);
 app.use('/', staticRoutes);
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-
 // Rota de cadastro
 app.post('/register', async (req, res) => {
   const { email, password, nome } = req.body;
 
+  // Verificar se todos os campos estão presentes
   if (!email || !password || !nome) {
+    console.log('Campos obrigatórios faltando:', { email, password, nome });
     return res.status(400).send('Todos os campos são obrigatórios.');
   }
 
   try {
+    // Conectar ao MongoDB
     const db = await connectToDatabase();
     const usuariosCollection = db.collection('usuarios');
-
-    // Verificar se o email já existe
+    
+    // Verificar se o email já existe no banco
     const usuarioExistente = await usuariosCollection.findOne({ email });
     if (usuarioExistente) {
+      console.log('Usuário já cadastrado:', email);
       return res.status(400).send('Usuário já cadastrado.');
     }
 
     // Criptografar a senha
     const hashedPassword = await bcrypt.hash(password, 10);
+    console.log('Senha criptografada:', hashedPassword);
 
-    // Inserir o usuário no MongoDB
-    await usuariosCollection.insertOne({ email, senha: hashedPassword, nome });
+    // Inserir o novo usuário com a senha criptografada no MongoDB
+    await usuariosCollection.insertOne({
+      email: email,
+      senha: hashedPassword, // Salvar a senha criptografada no MongoDB
+      nome: nome
+    });
 
+    console.log('Usuário cadastrado com sucesso:', { email, nome });
+    
+    // Redirecionar para a tela inicial
     res.redirect('/TelaInicial.html');
   } catch (err) {
     console.error('Erro ao cadastrar o usuário:', err);
     res.status(500).send('Erro no servidor.');
   }
 });
-
 
 // Rota de login
 app.post('/login', async (req, res) => {
@@ -79,11 +90,10 @@ app.post('/login', async (req, res) => {
       return res.redirect('/TelaCadastro.html');
     }
 
-    // Verifique se o usuário foi encontrado
     console.log('Usuário encontrado:', usuario);
 
-    // Comparar a senha fornecida com a senha criptografada
-    const isMatch = await bcrypt.compare(password, usuario.senha);
+    // Comparar a senha fornecida com a senha armazenada (em texto simples)
+    const isMatch = password === usuario.senha;
 
     if (!isMatch) {
       console.log('Senha incorreta.');
@@ -98,9 +108,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
-
-
-// Rota para receber o formulário
+// Rota para receber a denúncia
 app.post('/submit-report', (req, res) => {
   const reportText = req.body.reportText;
 
@@ -108,18 +116,30 @@ app.post('/submit-report', (req, res) => {
       return res.status(400).send('Texto do report não pode estar vazio');
   }
 
-  // Query para inserir o report no banco de dados
-  const query = 'INSERT INTO reports (report_text) VALUES (?)';
+  const query = 'INSERT INTO denuncias (report_text) VALUES (?)';
 
   mysql.query(query, [reportText], (err, result) => {
       if (err) {
           console.error('Erro ao inserir o report:', err);
           return res.status(500).send('Erro ao salvar o report');
       }
-      res.send('Report enviado com sucesso!');
+      res.redirect('/TelaForum.html');
   });
 });
 
+// Rota para exibir as denúncias
+app.get('/denuncias', (req, res) => {
+  const query = 'SELECT * FROM reports';
+
+  mysql.query(query, (err, results) => {
+    if (err) {
+      console.error('Erro ao buscar as denúncias:', err);
+      return res.status(500).send('Erro no servidor.');
+    }
+
+    res.json(results);
+  });
+});
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);

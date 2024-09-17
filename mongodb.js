@@ -1,9 +1,16 @@
-const mongoose = require('mongoose');
+const { MongoClient } = require('mongodb');
 
 const url = 'mongodb+srv://admin:MGGoA8eXUBrcoVXG@cluster0.qelem.mongodb.net/denuncias_db';
 
-mongoose.connect(url)
-  .then(() => console.log('Conectado ao MongoDB Atlas!'))
-  .catch((error) => console.error('Erro ao conectar ao MongoDB:', error));
+let db;
 
-module.exports = mongoose;
+async function connectToDatabase() {
+  if (!db) {
+    const client = new MongoClient(url);
+    await client.connect();
+    db = client.db('denuncias_db');
+  }
+  return db;
+}
+
+module.exports = connectToDatabase;
