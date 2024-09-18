@@ -46,7 +46,7 @@ router.post('/login', async (req, res) => {
 
     if (!isMatch) {
       console.log('Senha incorreta.');
-      return res.status(401).send('Credenciais inválidas. Senha incorreta.');
+      return res.redirect('/TelaLogin.html');
     }
 
     console.log('Login bem-sucedido, redirecionando para a tela inicial.');
