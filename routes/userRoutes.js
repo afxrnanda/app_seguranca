@@ -11,19 +11,15 @@ router.post('/register', async (req, res) => {
   }
 
   try {
-    // Verificar se o email já está cadastrado
     const usuarioExistente = await Usuario.findByEmail(email);
     if (usuarioExistente) {
       return res.status(400).send('Usuário já cadastrado.');
     }
 
-    // Criptografar a senha
     const senhaCriptografada = await bcrypt.hash(password, 10);
 
-    // Criar novo usuário
     await Usuario.create(nome, email, senhaCriptografada);
 
-    // Redirecionar para a tela inicial após o registro bem-sucedido
     res.redirect('/TelaInicial.html');
   } catch (err) {
     console.error('Erro ao registrar usuário:', err);
@@ -39,7 +35,6 @@ router.post('/login', async (req, res) => {
   }
 
   try {
-    // Buscar o usuário pelo email no MongoDB
     const usuario = await Usuario.findByEmail(email);
     
     if (!usuario) {
@@ -47,7 +42,6 @@ router.post('/login', async (req, res) => {
       return res.redirect('/TelaCadastro.html');
     }
 
-    // Comparar a senha fornecida com o hash armazenado no banco de dados
     const isMatch = await bcrypt.compare(password, usuario.senha);
 
     if (!isMatch) {
@@ -62,6 +56,5 @@ router.post('/login', async (req, res) => {
     res.status(500).send('Erro no servidor.');
   }
 });
-
 
 module.exports = router;
