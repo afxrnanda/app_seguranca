@@ -5,24 +5,16 @@ const denunciaRoutes = require('./routes/denunciaRoutes');
 const staticRoutes = require('./routes/staticRoutes');
 const bodyParser = require('body-parser');
 const mysql = require('./mysql');
-const bcrypt = require('bcrypt');
-const connectToDatabase = require('./mongodb');
 
 const app = express();
 const port = 3000;
 
-// Configuração de middlewares
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-// Servindo CSS e Imagens a partir da pasta public
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Servindo o HTML a partir da pasta views
 app.use(express.static(path.join(__dirname, 'views')));
 
-// Usando as rotas
 app.use('/', userRoutes);
 app.use('/', denunciaRoutes);
 app.use('/', staticRoutes);
